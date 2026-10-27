@@ -18,7 +18,7 @@ A synchronous First-In, First-Out (FIFO) buffer implemented in Verilog HDL, with
 ## Verification Approach
 
 ### 1. Directed Testing
-In this type of testing, the verification engineer has to give the stimulus to the DUT manually, and keep track of corner cases and coverage.
+In this type of testing, the verification engineer has to give the stimulus to the DUT manually.
 
 ### 2. Scoreboard-Based Verification
 This testing adds a layer that simplifies directed testing. We use a separate independent model and provide the same stimulus to the model as well as the DUT and compare the outputs of the two to test the DUT. This makes the testbench self-testing and automated. Each type of check and error are counted and displayed in the summary, at the end.
