@@ -13,20 +13,20 @@ A synchronous First-In, First-Out (FIFO) buffer implemented in Verilog HDL, with
 - Full and empty status flags
 - Simultaneous read and write operations supported
 - Extra bit in pointers used to detect a wraparound
-- Parameterisation for DATA_WIDTH and DATA_DEPTH works only for values that can be expressed as powers of 2
+- DATA_DEPTH values must be a power of 2
 
 ## Verification Approach
 
 ### 1. Directed Testing
-In this type of testing, the verification engineer has to give the stimulus to the DUT manually.
+Directed testing uses explicitly defined stimulus to exercise specific scenarios. The engineer identifies the scenarios to test and checks whether the DUT behaves as expected.
 
 ### 2. Scoreboard-Based Verification
-This testing adds a layer that simplifies directed testing. We use a separate independent model and provide the same stimulus to the model as well as the DUT and compare the outputs of the two to test the DUT. This makes the testbench self-testing and automated. Each type of check and error are counted and displayed in the summary, at the end.
+The scoreboard introduces an independent reference model that receives the same stimulus as the DUT. It predicts the expected FIFO behavior and compares the expected results against the DUT's outputs, including read data and status flags. This makes the testbench self-checking and automates error detection. The testbench also maintains counters for different checks and errors and displays a summary at the end.
 
 ### 3. Randomized Parameterized Testing
-This testing adds yet another layer to the testbench. Earlier, we were giving stimulus directly and the scoreboard performed automated verification. Now, we give randomised stimulus to the DUT and then compare it with our model. This enables the testbench to test a variety of scenarios which cannot all be specified manually. But, we also check the coverage of the random testing to ensure that it covers all the important scenarios.
+The randomized testbench generates varied read/write stimulus and compares the DUT's behavior against the reference model. This helps explore sequences and interactions that may be difficult to enumerate manually, but it may not hit all cases. Functional coverage flags track whether selected important scenarios have occurred, helping identify gaps in the randomly tested scenarios. The testbench is parameterized to support different data widths and FIFO depths.
 
-When I first created my FIFO RTL, I used directed testing to primarily check the DUT's basic working. Then, as I learnt more about verification, I improved my testbench to make the DUT's verification more robust.
+The project evolved incrementally: I began with directed testing to establish basic FIFO functionality, then developed a scoreboard-based testbench, and finally extended the verification approach with randomized stimulus and functional coverage.
 
 ## Repository Structure
 
