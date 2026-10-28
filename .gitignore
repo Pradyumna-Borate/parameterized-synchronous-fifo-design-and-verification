@@ -1,0 +1,13 @@
+# Questa / ModelSim generated files
+work/
+transcript
+*.wlf
+*.vcd
+*.vpd
+*.log
+*.jou
+
+# Editor and operating-system files
+.vscode/
+.DS_Store
+Thumbs.db
