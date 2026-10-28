@@ -42,16 +42,38 @@ The project evolved incrementally: I began with directed testing to establish ba
 
 ## Simulation
 
-Compile the RTL and the testbench you want to run in Questa/ModelSim. For example:
+Compile the RTL and the testbench you want to run in Questa/ModelSim. Use the following codes for the respective testbenches:
+
+### 1. Directed Testbench
 
 ```tcl
 vlib work
-vlog fifo_implementation.v tb_fifo.v
-vsim work.tb_fifo
+vlog rtl/fifo_implementation.v tb/tb_fifo.v
+vsim -voptargs=+acc work.tb_fifo
+add wave -r sim:/tb_fifo/*
 run -all
 ```
 
-Adjust the top-level testbench name to match the module declared in each testbench file.
+### 2. Scoreboard-Based Testbench
+
+```tcl
+vlib work
+vlog rtl/fifo_implementation.v tb/tb_fifo_scoreboard.v
+vsim -voptargs=+acc work.tb_fifo_scoreboard
+add wave -r sim:/tb_fifo_scoreboard/*
+run -all
+```
+
+### 3. Randomized Parameterized Testbench
+
+```tcl
+vlib work
+vlog rtl/fifo_implementation.v tb/tb_fifo_random_parametrized.v
+vsim -voptargs=+acc work.tb_fifo_random_parametrized
+add wave -r sim:/tb_fifo_random_parametrized/*
+run -all
+```
+These codes enable signal access and also add all the internal waveform signals in the waveform viewer to enable waveform debugging.
 
 ## Results
 
