@@ -73,7 +73,7 @@ vsim -voptargs=+acc work.tb_fifo_random_parametrized
 add wave -r sim:/tb_fifo_random_parametrized/*
 run -all
 ```
-These codes enable signal access and also add all the internal waveform signals in the waveform viewer to enable waveform debugging.
+These codes enable signal access and also add all the internal waveform signals in the waveform viewer to enable waveform debugging. If the waveform window feels cluttered with signals, only keep the waveforms that you want to monitor and remove the others.
 
 ## Results
 
