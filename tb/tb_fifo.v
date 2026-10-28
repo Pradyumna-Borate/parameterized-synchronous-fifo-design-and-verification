@@ -210,6 +210,8 @@ module tb_fifo ();
 
 		#10;
 
+		$display("\n \nSUMMARY \n \n");
+
 		$display("total value checks= %d \ntotal value errors= %d \n", value_checks, value_errors);
 		if((value_errors == 0) && (value_checks > 0))
 			$display("VALUE TEST PASSED SUCCESSFULLY !!\n");

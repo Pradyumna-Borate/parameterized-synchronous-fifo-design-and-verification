@@ -262,7 +262,7 @@ module tb_fifo_random_parameterized #(parameter DATA_WIDTH= 8, DATA_DEPTH=8, POI
 
 	task coverage_report;
     		begin
-        		$display("Coverage reoprt");
+        		$display("\n \nCoverage reoprt \n \n");
         		$display("Empty observed             : %b", empty);
         		$display("Full observed              : %b", full);
         		$display("Accepted write             : %b", write);
@@ -279,6 +279,7 @@ module tb_fifo_random_parameterized #(parameter DATA_WIDTH= 8, DATA_DEPTH=8, POI
 
 	task error_report;
     		begin
+			$display("\n \nError reoprt \n \n");
         		if(errors == 0)
 				$display("TEST PASSED SUCCESSFULLY !!! \nno. of checks performed= %d \n", checks);
 			else

@@ -107,6 +107,8 @@ module tb_fifo_scoreboard();
 		
 		@(posedge clk); #0.1;
 		@(negedge clk); rd_en= 1'b0; #10;
+
+		$display("\n \n SCOREBOARD SUMMARY \n \n");
 		
 		if(errors == 0)
 			$display("TEST PASSED SUCCESSFULLY !!! \nno. of checks performed= %d \n", checks);
