@@ -84,3 +84,4 @@ Add verified simulation results and relevant waveform screenshots here.
 - Additional corner-case testing
 - Expanded functional coverage
 - SystemVerilog-based verification
+- Making randomised tests reproducible
