@@ -77,48 +77,47 @@ These codes enable signal access and also add all the internal waveform signals 
 
 ## Results
 
-## Results
-
 ### 1. Basic FIFO Operations (Directed Testing)
 
 The waveform demonstrates synchronous write and read transactions, showing that data is read in FIFO order and illustrating the behavior of the full and empty flags. The read and write pointers are changed as the data is read or written in the memory.
 
-![Basic FIFO operations waveform](docs/basic_fifo_operation_waveform.jpg)
+![Basic FIFO operations waveform](docs/basic_fifo_operation_waveform.jpeg)
 
 ### 2. Signal Monitoring
 
 The testbench monitors every signal of DUT each time an operation is performed to make debugging easier. This is practiced for all the three testbenches.
-![Signal Monitoring](docs/signal_monitoring.jpg)
+
+![Signal Monitoring](docs/signal_monitoring.jpeg)
 
 ### 3. Directed Testing Sumary
 
 The report summarises how many checks were done for each type of test, and how many errors were reported.
 
-![Directed Testing Sumary](docs/directed_testing_summary.jpg)
+![Directed Testing Sumary](docs/directed_testing_summary.jpeg)
 
 ### 4. DUT and Model comparison (Scoreboard based Verification)
 
 The waveform illustrates how the DUT operation compares to the operation of an independent reference model under the same stimulus. Scoreboard based verification is used to compare the DUT to the model and verify the DUT.
 
-![DUT and Model Comparison](docs/dut_and_model_comparison_waveform.jpg)
+![DUT and Model Comparison](docs/dut_and_model_comparison_waveform.jpeg)
 
 ### 5. Scoreboard Summary
 
 The scoreboard summary gives us the final verdict of the verification. It also shows how many total checks were performed and then shows how many checks were performed for each test and how many errors were reported.
 
-![Scoreboard Summary](docs/scoreboard_summary.jpg)
+![Scoreboard Summary](docs/scoreboard_summary.jpeg)
 
 ### 5. Randomised and Parameterised Waveform
 
 This waveform shows us the result of a randomised and parameterised FIFO. It shows the parameters- DATA_WIDTH, DATA_DEPTH, and POINTER_WIDTH on the top, followed by the DUT signals and the model signals. Randomised testing poses a challenge that we can't guarantee that all possible test cases are covered, so the coverage flags track whether the important cases are covered, thus we can test the FIFO for various random testcases, while also making sure that important testcases are covered.
 
-![Randomised and Parameterised Waveform](docs/randomised_and_parameterised.jpg)
+![Randomised and Parameterised Waveform](docs/randomised_and_parameterised.jpeg)
 
 ### 5. Coverage and Error Report
 
 This report summarises what all cases were covered in the randomised testing, to ensure that randomised testing doesn't miss important tests. The error report gives the verdict of the tests and shows how many checks were performed for each test and how many errors occurred in them.
 
-![Coverage and Error Report](docs/coverage_and_error_report.jpg)
+![Coverage and Error Report](docs/coverage_and_error_report.jpeg)
 
 
 ## Future Improvements
