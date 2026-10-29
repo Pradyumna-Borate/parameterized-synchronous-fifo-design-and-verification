@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module tb_fifo_random_parameterized #(parameter DATA_WIDTH= 8, DATA_DEPTH=8, POINTER_WIDTH= $clog2(DATA_DEPTH)) ();
+module tb_fifo_random_parameterized #(parameter DATA_WIDTH= 16, DATA_DEPTH=4, POINTER_WIDTH= $clog2(DATA_DEPTH)) ();
 
 	reg clk=1'b0, reset;
 	reg wr_en, rd_en;
