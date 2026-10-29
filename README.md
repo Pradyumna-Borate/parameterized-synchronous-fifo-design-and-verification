@@ -111,7 +111,7 @@ The scoreboard summary gives us the final verdict of the verification. It also s
 
 This waveform shows us the result of a randomised and parameterised FIFO. It shows the parameters- DATA_WIDTH, DATA_DEPTH, and POINTER_WIDTH on the top, followed by the DUT signals and the model signals. Randomised testing poses a challenge that we can't guarantee that all possible test cases are covered, so the coverage flags track whether the important cases are covered, thus we can test the FIFO for various random testcases, while also making sure that important testcases are covered.
 
-![Randomised and Parameterised Waveform](docs/randomised_and_parameterised.jpeg)
+![Randomised and Parameterised Waveform](docs/randomised_and_parameterised_waveform.jpeg)
 
 ### 5. Coverage and Error Report
 
