@@ -113,6 +113,11 @@ This waveform shows us the result of a randomised and parameterised FIFO. It sho
 
 ![Randomised and Parameterised Waveform](docs/randomised_and_parameterised_waveform.jpeg)
 
+In the next waveform, values of the parameters are changed: DATA_WIDTH to 16 bits, DATA_DEPTH to 4 bits. POINTER_WIDTH is calculated automatically. 
+
+![Parameters changed](docs/parameters_changed.jpeg)
+
+
 ### 5. Coverage and Error Report
 
 This report summarises what all cases were covered in the randomised testing, to ensure that randomised testing doesn't miss important tests. The error report gives the verdict of the tests and shows how many checks were performed for each test and how many errors occurred in them.
