@@ -30,16 +30,18 @@ The project evolved incrementally: I began with directed testing to establish ba
 
 ## Repository Structure
 
+
+
+## Repository Structure
+
+```text
 synchronous-fifo-verification/
-│
 ├── rtl/
 │   └── fifo_implementation.v
-│
 ├── tb/
 │   ├── tb_fifo.v
 │   ├── tb_fifo_scoreboard.v
 │   └── tb_fifo_random_parametrized.v
-│
 ├── docs/
 │   ├── basic_fifo_operation_waveform.jpeg
 │   ├── signal_monitoring.jpeg
@@ -49,8 +51,9 @@ synchronous-fifo-verification/
 │   ├── randomised_and_parameterised_waveform.jpeg
 │   ├── parameters_changed.jpeg
 │   └── coverage_and_error_report.jpeg
-│
 └── README.md
+```
+
 
 ## Tools
 
@@ -141,11 +144,14 @@ This report summarises what all cases were covered in the randomised testing, to
 
 ![Coverage and Error Report](docs/coverage_and_error_report.jpeg)
 
-Verification stage	        What it demonstrates
-Directed testing	          Predefined functional and boundary scenarios
-Scoreboard verification	    Automated comparison against a reference model
-Randomized verification	    Varied stimulus with selected functional coverage tracking
-Parameterized simulation	  Operation with different supported data widths and depths
+
+| Verification Stage | What It Demonstrates |
+|---|---|
+| Directed Testing | Verification of predefined functional scenarios and boundary conditions. |
+| Scoreboard-Based Verification | Automated comparison of DUT behavior against an independent reference model. |
+| Randomized Verification | Exploration of varied read/write sequences with functional coverage tracking of selected scenarios. |
+| Parameterized Simulation | Demonstration of the design with different supported data widths and FIFO depths. |
+
 
 ## Future Improvements
 
