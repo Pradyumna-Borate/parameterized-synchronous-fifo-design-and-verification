@@ -8,20 +8,20 @@ A synchronous First-In, First-Out (FIFO) buffer implemented in Verilog HDL, with
 
 - Data width: 8 bits (default)
 - FIFO depth: 8 entries (default)
-- Synchronous read and write operations
+- Read and write operations are controlled by a common clock
 - Circular read and write pointers
 - Full and empty status flags
 - Simultaneous read and write operations supported
-- Extra bit in pointers used to detect a wraparound
-- DATA_DEPTH values must be a power of 2
+- An additional pointer bit distinguishes wraparound phases for full/empty detection.
+- FIFO depth must be a power of 2
 
 ## Verification Approach
 
 ### 1. Directed Testing
-Directed testing uses explicitly defined stimulus to exercise specific scenarios. The engineer identifies the scenarios to test and checks whether the DUT behaves as expected.
+Directed testing uses explicitly defined stimulus to exercise predefined scenarios. The engineer identifies the scenarios to test and checks whether the DUT behaves as expected.
 
 ### 2. Scoreboard-Based Verification
-The scoreboard introduces an independent reference model that receives the same stimulus as the DUT. It predicts the expected FIFO behavior and compares the expected results against the DUT's outputs, including read data and status flags. This makes the testbench self-checking and automates error detection. The testbench also maintains counters for different checks and errors and displays a summary at the end.
+This testbench introduces an independent reference model that receives the same stimulus as the DUT. It predicts the expected FIFO behavior. The scoreboard compares the expected results against the DUT's outputs, including read data and status flags. This makes the testbench self-checking and automates error detection. The testbench also maintains counters for different checks and errors and displays a summary at the end.
 
 ### 3. Randomized Parameterized Testing
 The randomized testbench generates varied read/write stimulus and compares the DUT's behavior against the reference model. This helps explore sequences and interactions that may be difficult to enumerate manually, but it may not hit all cases. Functional coverage flags track whether selected important scenarios have occurred, helping identify gaps in the randomly tested scenarios. The testbench is parameterized to support different data widths and FIFO depths.
@@ -30,10 +30,27 @@ The project evolved incrementally: I began with directed testing to establish ba
 
 ## Repository Structure
 
-- `fifo_implementation.v` — FIFO RTL implementation
-- `tb_fifo.v` — directed testbench
-- `tb_fifo_scoreboard.v` — self-checking scoreboard testbench
-- `tb_fifo_random_parametrized.v` — randomized parameterized testbench
+synchronous-fifo-verification/
+│
+├── rtl/
+│   └── fifo_implementation.v
+│
+├── tb/
+│   ├── tb_fifo.v
+│   ├── tb_fifo_scoreboard.v
+│   └── tb_fifo_random_parametrized.v
+│
+├── docs/
+│   ├── basic_fifo_operation_waveform.jpeg
+│   ├── signal_monitoring.jpeg
+│   ├── directed_testing_summary.jpeg
+│   ├── dut_and_model_comparison_waveform.jpeg
+│   ├── scoreboard_summary.jpeg
+│   ├── randomised_and_parameterised_waveform.jpeg
+│   ├── parameters_changed.jpeg
+│   └── coverage_and_error_report.jpeg
+│
+└── README.md
 
 ## Tools
 
@@ -42,7 +59,7 @@ The project evolved incrementally: I began with directed testing to establish ba
 
 ## Simulation
 
-Compile the RTL and the testbench you want to run in Questa/ModelSim. Use the following codes for the respective testbenches:
+Compile the RTL and the testbench you want to run in Questa/ModelSim. Use the following commands for the respective testbenches:
 
 ### 1. Directed Testbench
 
@@ -73,7 +90,7 @@ vsim -voptargs=+acc work.tb_fifo_random_parametrized
 add wave -r sim:/tb_fifo_random_parametrized/*
 run -all
 ```
-These codes enable signal access and also add all the internal waveform signals in the waveform viewer to enable waveform debugging. If the waveform window feels cluttered with signals, only keep the waveforms that you want to monitor and remove the others.
+The +acc option preserves access to internal signals during simulation, while add wave -r recursively adds signals under the specified testbench hierarchy to the waveform viewer. This makes it easier to monitor and debug the DUT and testbench behavior. Unnecessary signals can be removed from the waveform viewer to improve readability.
 
 ## Results
 
@@ -89,17 +106,17 @@ The testbench monitors every signal of DUT each time an operation is performed t
 
 ![Signal Monitoring](docs/signal_monitoring.jpeg)
 
-### 3. Directed Testing Sumary
+### 3. Directed Testing Summary
 
 The report summarises how many checks were done for each type of test, and how many errors were reported.
 
-![Directed Testing Sumary](docs/directed_testing_summary.jpeg)
+![Directed Testing Summary](docs/directed_testing_summary.jpeg)
 
-### 4. DUT and Model comparison (Scoreboard based Verification)
+### 4. DUT-Model comparison (Scoreboard based Verification)
 
 The waveform illustrates how the DUT operation compares to the operation of an independent reference model under the same stimulus. Scoreboard based verification is used to compare the DUT to the model and verify the DUT.
 
-![DUT and Model Comparison](docs/dut_and_model_comparison_waveform.jpeg)
+![DUT-Model Comparison](docs/dut_and_model_comparison_waveform.jpeg)
 
 ### 5. Scoreboard Summary
 
@@ -107,13 +124,13 @@ The scoreboard summary gives us the final verdict of the verification. It also s
 
 ![Scoreboard Summary](docs/scoreboard_summary.jpeg)
 
-### 5. Randomised and Parameterised Waveform
+### 5. Randomized and Parameterized Waveform
 
-This waveform shows us the result of a randomised and parameterised FIFO. It shows the parameters- DATA_WIDTH, DATA_DEPTH, and POINTER_WIDTH on the top, followed by the DUT signals and the model signals. Randomised testing poses a challenge that we can't guarantee that all possible test cases are covered, so the coverage flags track whether the important cases are covered, thus we can test the FIFO for various random testcases, while also making sure that important testcases are covered.
+This waveform shows us the result of a randomized and parameterized FIFO. It shows the parameters- DATA_WIDTH, DATA_DEPTH, and POINTER_WIDTH on the top, followed by the DUT signals and the model signals. Randomized testing poses a challenge that we can't guarantee that all possible test cases are covered, so the coverage flags track whether the important cases are covered, thus we can test the FIFO for various random testcases, while also making sure that important testcases are covered.
 
-![Randomised and Parameterised Waveform](docs/randomised_and_parameterised_waveform.jpeg)
+![Randomized and Parameterized Waveform](docs/randomised_and_parameterised_waveform.jpeg)
 
-In the next waveform, values of the parameters are changed: DATA_WIDTH to 16 bits, DATA_DEPTH to 4 bits. POINTER_WIDTH is calculated automatically. 
+In the next waveform, values of the parameters are changed: DATA_WIDTH to 16 bits, DATA_DEPTH to 4. POINTER_WIDTH is calculated automatically. 
 
 ![Parameters changed](docs/parameters_changed.jpeg)
 
@@ -124,6 +141,11 @@ This report summarises what all cases were covered in the randomised testing, to
 
 ![Coverage and Error Report](docs/coverage_and_error_report.jpeg)
 
+Verification stage	        What it demonstrates
+Directed testing	          Predefined functional and boundary scenarios
+Scoreboard verification	    Automated comparison against a reference model
+Randomized verification	    Varied stimulus with selected functional coverage tracking
+Parameterized simulation	  Operation with different supported data widths and depths
 
 ## Future Improvements
 
